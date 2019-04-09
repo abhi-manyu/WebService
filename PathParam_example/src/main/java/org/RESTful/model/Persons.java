@@ -5,6 +5,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/persons")
@@ -23,4 +25,14 @@ public class Persons
 	   
 	   return Response.status(200).entity(output).build();
    }
+   
+   @GET
+   @Produces(MediaType.TEXT_PLAIN)
+   public Response displayDetails(@QueryParam("name")String name,
+		                           @QueryParam("age")int age)
+   {
+	   String info="name is : "+name+" and the age is : "+age;
+	   return Response.status(200).entity(info).build();
+   }
+   
 }
