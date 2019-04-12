@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<style>
+  tr {
+	text-align: center;
+}
+input[type=submit],input[type=reset]
+{
+	margin: 5px;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+<form action="./rest/students/delete" method="post">
+    <table>
+        <tr>
+           <td>enter the Id u want to delete</td>
+           <td><input type="number" name="delID" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="reset" value="clear" /><input type="submit" value="delte data" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
