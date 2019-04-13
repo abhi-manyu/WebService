@@ -51,17 +51,12 @@ public class PostResource
    public List<Post> addPost(Post post)
    {
 	   
-	  /* for(Post temp_post:posts)
-	   {
-		   if(post.getPostId()==temp_post.getPostId())
-		   {
-			   post.setPostId(posts);
-			   addPost(post);
-		   }
-	   }*/
-	   
-	   post.setPostId(posts.size()+1);
-	   posts.add(post);
+	  for(Post temp_post : posts)
+	  {
+		  if(temp_post.getPostId()==post.getPostId())
+			  post.setPostId(posts.size()+1);
+	  }
+	  posts.add(post);
 	   return posts;
    }
    
@@ -107,5 +102,7 @@ public class PostResource
 	      return posts;
 	   return null;
    }
+   
+   
    
 }

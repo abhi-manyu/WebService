@@ -3,6 +3,7 @@ package org.Chat.example.service;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -55,5 +56,12 @@ public class CommentService
     }
     
     
+    @DELETE
+    @Path("/{c_id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public List<Comment> deleteComment(@PathParam("id") int p_id,@PathParam("c_id")int c_id)
+    {
+    	return cr.deleteComment(p_id, c_id);
+    }
     
 }

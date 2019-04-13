@@ -87,4 +87,29 @@ public class CommentResouce
 	   return null;
    }
    
+   public List<Comment> deleteComment(int p_id, int c_id)
+   {
+	   Iterator<Post> itr=posts.iterator();
+	   while(itr.hasNext())
+	   {
+		  Post post=itr.next();
+		  List<Comment> comments;
+		  if(p_id==post.getPostId())
+		  {
+			  comments=post.getComments();
+			  Iterator<Comment> itr2=comments.iterator();
+			  while(itr2.hasNext())
+			  {
+				  Comment comment=itr2.next();
+				  if(comment.getCmtId()==c_id)
+					  itr2.remove();
+			  }
+			  return comments;
+		  }
+	   }
+       return null;   
+   }
+   
+   
+   
 }
