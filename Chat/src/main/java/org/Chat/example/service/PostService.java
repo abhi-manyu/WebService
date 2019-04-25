@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.Chat.example.beans.Post;
+import org.Chat.example.resource.LikeResource;
 import org.Chat.example.resource.PostResource;
 
 @Path("/posts")
@@ -65,6 +66,12 @@ public class PostService
    public CommentService getCommentService()
    {
 	   return new CommentService();
+   }
+   
+   @Path("/{id}/likes")
+   public LikeService getLikeService()
+   {
+	   return new LikeService();
    }
    
 }

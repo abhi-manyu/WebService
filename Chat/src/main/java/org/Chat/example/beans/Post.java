@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlRootElement
+@JsonbPropertyOrder({"postId","post","posterName","postingDate"})
 public class Post
 {
    private int postId;
@@ -54,6 +60,7 @@ public Date getPostingDate() {
 public void setPostingDate(Date postingDate) {
 	this.postingDate = postingDate;
 }
+@XmlTransient
 public List<Comment> getComments() {
 	return comments;
 }

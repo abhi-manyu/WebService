@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.Chat.example.beans.Comment;
+import org.Chat.example.beans.Like;
 import org.Chat.example.beans.Post;
 import org.Chat.example.database.Databse;
 
@@ -13,22 +14,28 @@ public class PostResource
    private List<Post> posts=Databse.getPosts();
    
    
-   /*public PostResource()
+   public PostResource()
   {
 	   if(posts.size()==0)
 	   {
 	Post ps=new Post(1,"i m abhi","abhi");
     Comment c1=new Comment(1,"this is first comment","abhi");
     Comment c2=new Comment(2,"this is second comment","arabinda");
-    Comment c3=new Comment(3,"this is third comment","anshuraj");
     List<Comment> comments=new ArrayList<>();
     comments.add(c1);
     comments.add(c2);
-    comments.add(c3);
     ps.setComments(comments);
+    
+    Like like1=new Like(1,"abhi");
+    Like like2=new Like(2,"Arabinda");
+    List<Like> likes=new ArrayList<>();
+    likes.add(like1);
+    likes.add(like2);
+    ps.setLikes(likes);
+    
     posts.add(ps);
 	   }
-}*/
+}
    
    
    
