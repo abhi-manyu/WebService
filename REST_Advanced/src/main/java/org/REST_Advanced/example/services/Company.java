@@ -9,11 +9,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/companies/{pathname}")
-@Singleton
 public class Company
 {
 	@PathParam("pathname")String pathValue;
-	@QueryParam("queryname")String queryValue;
+	@QueryParam("query")String queryValue;
 	
 	private int count;
 	
