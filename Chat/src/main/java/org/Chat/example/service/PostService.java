@@ -30,7 +30,8 @@ public class PostService
    
    @Path("/{id}")
    @GET
-   @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+   @Produces(MediaType.APPLICATION_JSON)
+   //@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
    public Post getPost(@PathParam("id")int id)
    {
 	   return pr.getPost(id);

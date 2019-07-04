@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import org.Chat.example.beans.Like;
 import org.Chat.example.resource.LikeResource;
 
-@Path("/")
+//@Path("/")
 public class LikeService
 {
    LikeResource lr=new LikeResource();
@@ -25,12 +25,21 @@ public class LikeService
 		return lr.getAllLikes(po_id);
 	}
 	
+	@GET
+	@Path("/{lid}")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Like get_a_Like(@PathParam("id") int id, @PathParam("lid") int lid)
+	{
+		return lr.findLike(id, lid);
+	}
+	
 	@POST
-	@Path("/add")
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List<Like> addLike(Like like,@PathParam("id")int po_id)
 	{
 		return lr.addLike(like, po_id);
 	}
+	
+	
 }

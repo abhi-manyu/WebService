@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.Chat.example.beans.Comment;
 import org.Chat.example.resource.CommentResouce;
 
-@Path("/")
+//@Path("/")
 public class CommentService
 {
 	
@@ -37,7 +37,6 @@ public class CommentService
     }
     
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_XML)
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<Comment> addComment(@PathParam("id")int id, Comment comment)
