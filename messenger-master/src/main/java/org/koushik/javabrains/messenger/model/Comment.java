@@ -2,6 +2,8 @@ package org.koushik.javabrains.messenger.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class Comment {
 	
 
@@ -33,6 +35,8 @@ public class Comment {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getCreated() {
 		return created;
 	}

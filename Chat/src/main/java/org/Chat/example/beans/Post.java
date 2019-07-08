@@ -8,8 +8,6 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @XmlRootElement
 @JsonbPropertyOrder({"postId","post","posterName","postingDate"})

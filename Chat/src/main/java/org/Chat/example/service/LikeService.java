@@ -3,6 +3,7 @@ package org.Chat.example.service;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -41,5 +42,13 @@ public class LikeService
 		return lr.addLike(like, po_id);
 	}
 	
+	@Path("/{l_Id}")
+	@DELETE
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List<Like> delete_a_like(@PathParam("id") int po_id, @PathParam("l_Id") int lid)
+	{
+		System.out.println("recieved post id as : "+po_id+" like id as :"+lid);
+		return lr.delete_a_Like(po_id, lid);
+	}
 	
 }

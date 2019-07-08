@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.Chat.example.beans.Comment;
 import org.Chat.example.beans.Post;
 import org.Chat.example.database.Databse;
@@ -29,6 +33,10 @@ public class CommentResouce
    
    public Comment getComment(int pId,int cId)
    {
+	   ErrorMessage ermsg=new ErrorMessage("resourse not found",404,
+			   "www.resource_Not_Found_Exception.com");
+	   Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
+	   
 	   for(Post post:posts)
 	   {
 		   List<Comment> comments;
@@ -42,23 +50,37 @@ public class CommentResouce
 			   }
 		   }
 	   }
-	   return null;
+	     throw new WebApplicationException(resp);
    }
    
-   public List<Comment> addComment(int pId,Comment cmt)
+   public List<Comment> addComment(int pId,Comment comment)
    {
+	   
+	   ErrorMessage ermsg=new ErrorMessage("this comment already exists",409,"https://www.documentation_not_provided_by_me.com");
+	   
+	   Response resp=Response.status(Status.CONFLICT).entity(ermsg).build();
+	   
+	   
+	   
+	   List<Comment> comments=new ArrayList<>();
 	   for(Post post:posts)
 	   {
-		   List<Comment> comments;
 		   if(post.getPostId()==pId)
 		   {
 			   comments=post.getComments();
-			   cmt.setCmtId(comments.size()+1);
-			   comments.add(cmt);
+			   Iterator<Comment> itr=comments.iterator();
+			   while(itr.hasNext())
+			   {
+				   Comment cmt=itr.next();
+				   if(cmt.getCmtId()==comment.getCmtId())
+					   throw new WebApplicationException(resp);
+				      
+			   }
+			   comments.add(comment);
 			   return comments;
 		   }
 	   }
-	   return null;
+	   return comments;
    }
    
    public Comment updateComment(int pId,int cId,Comment cmt)

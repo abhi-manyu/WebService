@@ -40,7 +40,7 @@ public class PostService
    @Path("/add")
    @POST
    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-   @Consumes(MediaType.APPLICATION_XML)
+   @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
    public List<Post> addPost(Post post)
    {
 	   return pr.addPost(post);
@@ -74,5 +74,6 @@ public class PostService
    {
 	   return new LikeService();
    }
+   
    
 }

@@ -1,7 +1,12 @@
 package org.Chat.example.resource;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.Chat.example.beans.Like;
 import org.Chat.example.beans.Post;
@@ -56,5 +61,35 @@ public class LikeResource
 		   return null;
 	   }
 	   return null;
+   }
+   
+   public List<Like> delete_a_Like(int poId,int lId)
+   {
+	   ErrorMessage ermsg=new ErrorMessage("resourse can not be found , delete operation failed",404,"www.deleteoperationfailed.com");
+	   Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
+	   
+	   
+	   List<Like> likes=new ArrayList<>();
+	   for(Post post:posts)
+	   {
+		   if(post.getPostId()==poId)
+		   {
+			   likes=post.getLikes();
+			   Iterator<Like> itr=likes.iterator();
+			   while(itr.hasNext())
+			   {
+				   Like like=itr.next();
+				   if(like.getLkId()==lId)
+				   {
+					   System.out.println("found like");
+					   itr.remove();
+					   break;
+				   }
+			   }
+			   
+		   }
+		   return likes;
+	   }
+	   throw new WebApplicationException(resp);
    }
 }

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.Chat.example.beans.Comment;
 import org.Chat.example.beans.Like;
 import org.Chat.example.beans.Post;
@@ -45,26 +49,38 @@ public class PostResource
 	   return posts;
    }
    
+   
+   
    public Post getPost(int id)
    {
+	   ErrorMessage ermsg=new ErrorMessage("requested entity not found",404,
+			   "https://www.developer not provided documentetion.com");
+	   Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
 	   for(Post post:posts)
 	   {
 		   if(post.getPostId()==id)
 			   return post;
 	   }
-	   return null;
+	   throw new WebApplicationException(resp);
+	   
    }
    
    public List<Post> addPost(Post post)
    {
+	   ErrorMessage errmsg=
+			   new ErrorMessage("element already exists, try with some modification",409,
+					   "https://www.not_provided_by_developer.com");
+	   Response resp=Response.status(Status.CONFLICT).entity(errmsg).build();
 	   
-	  for(Post temp_post : posts)
+	  Iterator<Post> itr=posts.iterator();
+	  while(itr.hasNext())
 	  {
-		  if(temp_post.getPostId()==post.getPostId())
-			  post.setPostId(posts.size()+1);
+		  Post temp=itr.next();
+		  if(temp.getPostId()==post.getPostId())
+			  throw new WebApplicationException(resp);
 	  }
 	  posts.add(post);
-	   return posts;
+	  return posts;
    }
    
    public Post updatePost(int id,Post post)

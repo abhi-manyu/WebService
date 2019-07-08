@@ -8,6 +8,9 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @XmlRootElement
 public class Message {
 
@@ -41,6 +44,7 @@ public class Message {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	@JsonSerialize(using=JsonDateSerializer.class)
 	public Date getCreated() {
 		return created;
 	}
