@@ -37,7 +37,7 @@ public class CommentService
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public List<Comment> addComment(@PathParam("id")int id, Comment comment)
     {

@@ -9,16 +9,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+
 public class AdminController
 {
 	private int counter=3;
 	
-   @GetMapping(value="/logform")
+  // @GetMapping(value="/logform")
+   @RequestMapping(value="/logform")
    public String displayForm(Model mod)
    {
+	   System.out.println("METHOD NAME DISPLAY FORM::");
 	   mod.addAttribute("sign",new Admin());
+	   System.out.println("Model"+ mod);
 	   return "signin";
    }
    

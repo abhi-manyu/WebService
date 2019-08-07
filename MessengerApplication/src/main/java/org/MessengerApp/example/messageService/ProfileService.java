@@ -8,9 +8,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import org.MessengerApp.example.beans.ErrorMessage;
 import org.MessengerApp.example.beans.Message;
 import org.MessengerApp.example.beans.Profile;
 import org.hibernate.Criteria;
@@ -59,12 +62,20 @@ public class ProfileService
     	s=sf.openSession();
     	Criteria cr=s.createCriteria(Profile.class);
     	List<Profile> list=cr.list();
+    	if(list.size()<=0)
+    	{
+    		ErrorMessage ermsg = 
+    	    		  new ErrorMessage(204,
+    	    				  "no any profile found","www.google.com");
+    	    		Response resp=Response.status(Status.NO_CONTENT).entity(ermsg).build();
+    	    		throw new WebApplicationException(resp);
+    	}
     	s.close();
     	sf.close();
     	return list;
 	}
 	@Path("/get")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@POST
 	public Profile getSingleProfile(@FormParam("proid")int profid)
 	{
@@ -75,6 +86,13 @@ public class ProfileService
     	Criterion c=Restrictions.eq("id", profid);
     	cr.add(c);
     	Profile pr=(Profile) cr.uniqueResult();
+    	if(pr==null)
+    	{
+    		ErrorMessage ermsg = 
+    		  new ErrorMessage(404,"requested resiurces not found","https://www.google.com");
+    		Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
+    		throw new WebApplicationException(resp);
+    	}
     	return pr;
 	}
 	
@@ -92,6 +110,16 @@ public class ProfileService
     	Criterion c=Restrictions.eq("id",id);
     	cr.add(c);
     	Profile prf=(Profile) cr.uniqueResult();
+    	if(prf==null)
+    	{
+    		ErrorMessage ermsg = 
+    	    		  new ErrorMessage(404,
+    	    				  "requested resources not found hence can not b deleted ",
+    	    				  "https://www.google.com");
+    	    Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
+    	    throw new WebApplicationException(resp);
+    	}
+    	
     	s.delete(prf);
     	t.commit();
     	s.close();

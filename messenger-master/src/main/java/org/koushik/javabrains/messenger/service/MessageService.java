@@ -17,12 +17,8 @@ public class MessageService {
 	
 	public MessageService() {
 		
-		Map<Long,Comment> cmts=new HashMap<>();
-		cmts.put(1l,new Comment(1l,"this is the first comment","steve roget"));
 		Message msg=new Message(1, "Hello World", "Abhi");
-		msg.setComments(cmts);
 		messages.put(1L,msg);
-		
 		messages.put(2L, new Message(2, "Hello Jersey", "Manyu"));
 	}
 	

@@ -29,7 +29,7 @@ public class CommentResource {
 	}
 	
 	@POST
-	public Comment addComment(@PathParam("messageId") long messageId, Comment comment) {
+	public List<Comment> addComment(@PathParam("messageId") long messageId, Comment comment) {
 		return commentService.addComment(messageId, comment);
 	}
 	

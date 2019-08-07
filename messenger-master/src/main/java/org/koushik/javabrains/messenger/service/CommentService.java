@@ -16,7 +16,7 @@ import org.koushik.javabrains.messenger.model.Message;
 
 public class CommentService {
 	
-	private Map<Long, Message> messages = DatabaseClass.getMessages();
+	private static Map<Long, Message> messages = DatabaseClass.getMessages();
 	
 	public List<Comment> getAllComments(long messageId) {
 		Map<Long, Comment> comments = messages.get(messageId).getComments();
@@ -42,11 +42,12 @@ public class CommentService {
 		return comment;
 	}
 	
-	public Comment addComment(long messageId, Comment comment) {
+	public List<Comment> addComment(long messageId, Comment comment)
+	{
 		Map<Long, Comment> comments = messages.get(messageId).getComments();
 		comment.setId(comments.size() + 1);
 		comments.put(comment.getId(), comment);
-		return comment;
+		return new ArrayList(comments.values());
 	}
 	
 	public Comment updateComment(long messageId, Comment comment) {

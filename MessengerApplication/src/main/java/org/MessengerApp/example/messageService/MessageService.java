@@ -7,9 +7,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import org.MessengerApp.example.beans.ErrorMessage;
 import org.MessengerApp.example.beans.Message;
 import org.MessengerApp.example.beans.Profile;
 import org.hibernate.Criteria;
@@ -34,7 +37,7 @@ public class MessageService
 	@Path("/add")
     @Produces("text/html")
     @POST
-    public Response getAllMessage(@FormParam("mID")int mid,
+    public Response add_a_Message(@FormParam("mID")int mid,
     		@FormParam("msg") String msg, @FormParam("nam")String name)
     {
 		
@@ -83,13 +86,21 @@ public class MessageService
     	s=sf.openSession();
     	Criteria cr=s.createCriteria(Message.class);
     	List<Message> li= cr.list();
+    	if(li.size()<=0)
+    	{
+    		ErrorMessage ermsg = 
+    		  new ErrorMessage(204,
+    				  "No message instance found","http://www.google.com");
+    		Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
+    		throw new WebApplicationException(resp);
+    	}
     	s.close();
     	sf.close();
     	return li;
 	}
 	
     @Path("/get")
-    @Produces(MediaType.TEXT_HTML)
+    @Produces({MediaType.TEXT_HTML,MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     @POST
     public String getSinglemessage(@FormParam("getms")int msgID)
     {
@@ -100,6 +111,15 @@ public class MessageService
     	Criterion c=Restrictions.eq("messageID",msgID);
     	cr.add(c);
     	Message msg=(Message) cr.uniqueResult();
+    	if(msg==null)
+    	{
+    		ErrorMessage ermsg = 
+    		  new ErrorMessage(404,
+    				  "requested message resource not found","http://www.google.com");
+    		Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
+    		throw new WebApplicationException(resp);
+    	}
+    	
     	String output="<html><body><form action='./delete'>"
     			+"<h2>the message is : </h2><hr>"
     	        +"message id : "+msg.getMessageID()+"<br>"
