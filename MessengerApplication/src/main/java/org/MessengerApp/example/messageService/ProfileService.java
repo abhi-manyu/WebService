@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import org.MessengerApp.example.beans.ErrorMessage;
 import org.MessengerApp.example.beans.Message;
 import org.MessengerApp.example.beans.Profile;
+import org.MessengerApp.example.mailservice.ProfileSignUpMail;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,7 +37,9 @@ public class ProfileService
     @POST
     public Response addMessenger(@FormParam("pID")int pid,
     		@FormParam("fnm") String FNM, @FormParam("lnm")String LNM,
-    		@FormParam("phno")String phno,@FormParam("addre")String address)
+    		@FormParam("phno")String phno,
+    		@FormParam("mail")String mail,
+    		@FormParam("addre")String address)
     {
     	cfg.configure("org/MessengerApp/example/resources/messages.cfg.xml");
     	sf=cfg.buildSessionFactory();
@@ -50,6 +53,8 @@ public class ProfileService
     			+ "</body></html>";
     	s.close();
     	sf.close();
+    	Thread t1 = new Thread(new ProfileSignUpMail(mail));
+    	t1.start();
     	return Response.status(200).entity(output).build();
     }
 	

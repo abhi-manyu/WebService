@@ -13,7 +13,7 @@
 <form action="./rest/profiles/add" method="post">
      <table>
       <tr>
-         <td colspan="2"><h2>Register urself as a sender</h2></td>
+         <td colspan="2"><h2>Register urself as a Messenger</h2></td>
       </tr>
       <tr>
         <td>profileID : </td>
@@ -30,6 +30,10 @@
       <tr>
           <td>enter ur phone nomber :</td>
           <td><input type="text" name="phno" />
+      </tr>
+      <tr>
+          <td>enter ur mail id :</td>
+          <td><input type="email" name="mail" />
       </tr>
       <tr>
           <td>enter ur address : </td>
