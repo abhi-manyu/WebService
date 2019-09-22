@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import org.MessengerApp.example.beans.ErrorMessage;
 import org.MessengerApp.example.beans.Message;
 import org.MessengerApp.example.beans.Profile;
+import org.MessengerApp.example.mailling.Mailling;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,7 +37,8 @@ public class ProfileService
     @POST
     public Response addMessenger(@FormParam("pID")int pid,
     		@FormParam("fnm") String FNM, @FormParam("lnm")String LNM,
-    		@FormParam("phno")String phno,@FormParam("addre")String address)
+    		@FormParam("phno")String phno,@FormParam("mail")String mail,
+    		@FormParam("addre")String address)
     {
     	cfg.configure("org/MessengerApp/example/resources/messages.cfg.xml");
     	sf=cfg.buildSessionFactory();
@@ -50,6 +52,8 @@ public class ProfileService
     			+ "</body></html>";
     	s.close();
     	sf.close();
+    	Thread t1 = new Thread(new Mailling(mail));
+    	t1.start();
     	return Response.status(200).entity(output).build();
     }
 	
@@ -86,14 +90,16 @@ public class ProfileService
     	Criterion c=Restrictions.eq("id", profid);
     	cr.add(c);
     	Profile pr=(Profile) cr.uniqueResult();
+    	System.out.println(pr);
     	if(pr==null)
     	{
     		ErrorMessage ermsg = 
-    		  new ErrorMessage(404,"requested resiurces not found","https://www.google.com");
+    		  new ErrorMessage(404,"requested resources not found","https://www.google.com");
     		Response resp=Response.status(Status.NOT_FOUND).entity(ermsg).build();
     		throw new WebApplicationException(resp);
     	}
-    	return pr;
+    	else
+    		return pr;
 	}
 	
 	

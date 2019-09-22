@@ -32,6 +32,10 @@
           <td><input type="text" name="phno" />
       </tr>
       <tr>
+          <td>enter ur mail id :</td>
+          <td><input type="email" name="mail" />
+      </tr>
+      <tr>
           <td>enter ur address : </td>
           <td><textarea style="width: 5cm; height: 2cm;" name="addre"></textarea>
       </tr>

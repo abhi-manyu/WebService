@@ -10,6 +10,10 @@
 
 <style>
  
+ body{
+    background-color: black;
+ }
+ 
  ul {
   list-style-type: none;
   margin: 0;
@@ -22,6 +26,7 @@
 #danger{
     float: right;
     margin-right: 10px;
+    
 }
 
 li {
@@ -136,19 +141,41 @@ li.dropdown {
          <a href="javascript:void(0)" class="dropbtn">Help</a>
          <div class="dropdown-content">
               <a href="#what we provide">how can i help u</a>
+              <a href="#what we provide">retriving password</a>
+              <a href="#what we provide">registering a complaint</a>
          </div>
+         
      </li>
      
      
-     <li class="dropdown" id="danger">
-         <a href="./logout" class="dropbtn">
+     <li class="dropdown" id="danger" onclick=" return myFunction();" 
+         title="Log out" >
+         <a href="./logout" class="dropbtn" >
             <span class='fa fa-power-off' style="font-size:22px;"></span>
+            
          </a>
          
      </li>
      
      
+     
 </ul>
+
+    <script> 
+        /* function myalert() { 
+            alert(" U will be logged out of the application \n " + 
+                "are u sure u want to quit ?"); 
+        } */ 
+        
+        function myFunction() {
+        	  var r = confirm("Are u sure u want to quit the application!");
+        	  if (r == true) {
+        	    return true;
+        	  } else {
+        	    return false;
+        	  } 
+        	}
+    </script> 
 
 </body>
 
