@@ -14,33 +14,43 @@ import javax.mail.internet.MimeMessage;
 
 public class ProfileSignUpMail implements Runnable{
 
-	private String senderName;
+	private String recvrName;
 	
-	public ProfileSignUpMail(String senderName)
-	{
-		this.senderName=senderName;
-	}
-	
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-	public String getSenderName() {
-		return senderName;
+	public ProfileSignUpMail() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	
+		 
+	public ProfileSignUpMail(String recvrName) {
+		super();
+		this.recvrName = recvrName;
+	}
+
+	public String getRecvrName() {
+		return recvrName;
+	}
+
+
+
+	public void setRecvrName(String recvrName) {
+		this.recvrName = recvrName;
+	}
+
+
+
 	public void run()
 	{
 		System.out.println("the new thread name is : "+Thread.currentThread().getName());
-		try {
-			sendMail(senderName);
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				sendMail(recvrName);
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	
