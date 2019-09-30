@@ -10,6 +10,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+  
+  body{
+   background-repeat:no-repeat;
+   background-size: cover;
+   
+  } 
+
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -78,7 +85,7 @@ li.dropdown {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body background="C:\Users\abhimanyum\Desktop\apache-tomcat-9.0.13\webapps\images\backgr.jpg">
 
 	<ul>
 		<li><a class="fa fa-home" style="font-size: 22px;"></a></li>
