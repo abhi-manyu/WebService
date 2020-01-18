@@ -1,4 +1,4 @@
-package org.MessengerApp.example.mailling;
+package org.MessengerApp.example.mailservice;
 
 import java.util.Properties;
 
@@ -12,35 +12,45 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Mailling implements Runnable{
+public class ProfileSignUpMail implements Runnable{
 
-	private String senderName;
+	private String recvrName;
 	
-	public Mailling(String senderName)
-	{
-		this.senderName=senderName;
-	}
-	
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-	public String getSenderName() {
-		return senderName;
+	public ProfileSignUpMail() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	
+		 
+	public ProfileSignUpMail(String recvrName) {
+		super();
+		this.recvrName = recvrName;
+	}
+
+	public String getRecvrName() {
+		return recvrName;
+	}
+
+
+
+	public void setRecvrName(String recvrName) {
+		this.recvrName = recvrName;
+	}
+
+
+
 	public void run()
 	{
 		System.out.println("the new thread name is : "+Thread.currentThread().getName());
-		try {
-			sendMail(senderName);
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				sendMail(recvrName);
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	
@@ -83,12 +93,12 @@ public class Mailling implements Runnable{
 		Message msg = new MimeMessage(ms);
 		msg.setRecipient(Message.RecipientType.TO, new InternetAddress(rcvr));
 		msg.setSubject("Thanks for Registering in Messenger");
-		msg.setText("hello there , thank you for registering in messenger application."
+		msg.setText("hello there , how are you ? thank you for registering in messenger application."
 				+ "U are added as the valuable user of this messenger application , so hope u will use "
 				+ "it in a constructive way around."
 				+ "\n\n\n"
-				+ "Thanks & Regards\n"
-				+ "Team Messenger:)");
+				+ "Thanks & Regards \n"
+				+ "Team Messenger :)");
 		
 		msg.setFrom(new InternetAddress(myAccountEmail));
 		return msg;

@@ -8,6 +8,9 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 @XmlRootElement
 @JsonbPropertyOrder({"postId","post","posterName","postingDate"})
@@ -52,9 +55,13 @@ public String getPosterName() {
 public void setPosterName(String posterName) {
 	this.posterName = posterName;
 }
+
+@JsonSerialize(using=JsonDateSerializer.class)
 public Date getPostingDate() {
 	return postingDate;
 }
+
+@JsonDeserialize(using=JsonDateDeserializer.class)
 public void setPostingDate(Date postingDate) {
 	this.postingDate = postingDate;
 }

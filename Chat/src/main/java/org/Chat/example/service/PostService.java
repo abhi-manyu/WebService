@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.Chat.example.beans.Post;
-import org.Chat.example.resource.LikeResource;
 import org.Chat.example.resource.PostResource;
 
 @Path("/posts")
@@ -30,8 +29,8 @@ public class PostService
    
    @Path("/{id}")
    @GET
-   @Produces(MediaType.APPLICATION_JSON)
-   //@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+   //@Produces(MediaType.APPLICATION_JSON)
+   @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
    public Post getPost(@PathParam("id")int id)
    {
 	   return pr.getPost(id);
@@ -48,7 +47,7 @@ public class PostService
  
    @PUT
    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-   @Consumes(MediaType.APPLICATION_XML)
+   @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
    @Path("/{id}")
    public Post updatePost(@PathParam("id")int id,Post post)
    {

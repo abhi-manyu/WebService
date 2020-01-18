@@ -13,7 +13,7 @@
 <form action="./rest/profiles/add" method="post">
      <table>
       <tr>
-         <td colspan="2"><h2>Register urself as a sender</h2></td>
+         <td colspan="2"><h2>Register urself as a Messenger</h2></td>
       </tr>
       <tr>
         <td>profileID : </td>
